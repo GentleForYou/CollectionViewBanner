@@ -25,9 +25,6 @@
 //    bannerView.localImgs = @[@"bg_01",@"bg_02",@"bg_03",@"bg_04"];
     [self.view addSubview:bannerView];
     
-//    UIPageControl *page = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 20)];
-//    bannerView.customPageControl = page;
-    
 }
 
 
