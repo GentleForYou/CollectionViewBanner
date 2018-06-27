@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CollectionViewBanner"
-  s.version      = "1.0.0"
+  s.version      = "1.0.2"
   s.summary      = "有间隙卡片放大效果/无间隙无限制轮播Banner"
 
   # This description is used to generate tags and improve search results.
@@ -55,7 +55,7 @@ Pod::Spec.new do |s|
   s.author             = { "GentleForYou" => "1035741979@qq.com" }
   # Or just: s.author    = "shaowenle"
   # s.authors            = { "shaowenle" => "shaowenle@paypalm.cn" }
-  # s.social_media_url   = "http://twitter.com/shaowenle"
+  s.social_media_url   = "https://www.geekblog.top"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = 'CollectionViewBanner/**/*.{h,m}'
+  s.source_files  = 'CollectionViewBanner/Class/**/*'
   #s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
