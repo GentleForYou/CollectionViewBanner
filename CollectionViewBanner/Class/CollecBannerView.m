@@ -91,6 +91,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     BannerCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BannerCollectionViewCell" forIndexPath:indexPath];
+    if (_cellCornerRadius > 0) {
+        cell.layer.cornerRadius = _cellCornerRadius;
+        cell.layer.masksToBounds = YES;
+    }
     if (_urlImgs.count > 0) {
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:_dataImgs[indexPath.row]] placeholderImage:_placeHolderImage];
     } else if (_localImgs.count > 0) {
@@ -192,6 +196,10 @@
 {
     _pageControlFrame = pageControlFrame;
     _pageControl.frame = pageControlFrame;
+}
+- (void)setCellCornerRadius:(CGFloat)cellCornerRadius
+{
+    _cellCornerRadius = cellCornerRadius;
 }
 #pragma mark 定时器以及自动滚动相关设置
 -(void)createTimer {

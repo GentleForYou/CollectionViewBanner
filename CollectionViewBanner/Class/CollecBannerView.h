@@ -31,6 +31,8 @@
 @property (nonatomic,strong) UIImage *placeHolderImage;
 // 是否在只有一张图时隐藏pagecontrol，默认为YES
 @property(nonatomic) BOOL hidesForSinglePage;
+//cell圆角
+@property(nonatomic) CGFloat cellCornerRadius;
 //自动滚动间隔时间,默认2s
 @property (nonatomic, assign) CGFloat autoScrollTimeInterval;
 // 是否自动滚动,默认YES
