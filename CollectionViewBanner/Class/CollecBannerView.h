@@ -25,7 +25,8 @@
 @property (nonatomic, copy) NSArray *localImgs;
 // 图片url数组
 @property (nonatomic, copy) NSArray *urlImgs;
-
+//点击cell事件
+@property (nonatomic, copy) void(^clickBlock)(NSInteger currentIndex);
 
 //占位图
 @property (nonatomic,strong) UIImage *placeHolderImage;

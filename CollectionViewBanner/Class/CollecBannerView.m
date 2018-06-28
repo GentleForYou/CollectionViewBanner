@@ -107,6 +107,14 @@
     cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_dataImgs.count > 0) {
+        if (_clickBlock) {
+            _clickBlock(indexPath.row-2);
+        }
+    }
+}
 #pragma mark 数据赋值
 - (void)setUrlImgs:(NSArray *)urlImgs
 {
