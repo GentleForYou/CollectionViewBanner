@@ -30,7 +30,7 @@
     }];
     [self.view addSubview:bannerView];
     
-    //本地图片轮播 本地轮播图片圆角是因为本地图片
+    //本地图片轮播
     CollecBannerView *bannerView1 = [[CollecBannerView alloc] initWithFrame:CGRectMake(0, 300, [UIScreen mainScreen].bounds.size.width, 200) cellMidSize:CGSizeMake(kScreenWidth, 200)];
     bannerView1.localImgs = @[@"1",@"2",@"3",@"4"];
     bannerView1.pageControlFrame = CGRectMake(0, 200-15, kScreenWidth, 15);
