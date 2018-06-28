@@ -11,6 +11,19 @@
  
 ***
 
+> ###使用姿势
+ 
+ 
+```
+platform :ios, "9.0"
+
+target '你的工程名' do
+
+pod 'CollectionViewBanner', '~> 1.0'
+
+end
+```
+
 > ###urls图片轮播
 
 ```
