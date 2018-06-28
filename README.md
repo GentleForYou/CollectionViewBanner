@@ -7,8 +7,12 @@
 > 因为大多数banner都是无缝滚动,有卡片缩放效果的又没有
 > PageControl,且PageControl样式不支持自定义,所以根据自己项目
 > 需求和UI需求,造了一个轮子,希望分享出来能对大家有帮助,好用的话
-> 点个赞
+> 点个星
  
+![gif介绍](http://p9a0rgbgy.bkt.clouddn.com/45.gif)
+
+![间距介绍](http://p9a0rgbgy.bkt.clouddn.com/55.png)
+
 ***
 
 > ###使用姿势
