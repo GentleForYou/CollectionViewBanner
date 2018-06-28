@@ -2,8 +2,8 @@
 //  BannerLayout.h
 //  CollectionViewBanner
 //
-//  Created by 掌上汇通Mac on 2018/6/26.
-//  Copyright © 2018年 chushenruhua. All rights reserved.
+//  Created by mac on 2018/6/26.
+//  Copyright © 2018年 GentleForYou. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
