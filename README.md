@@ -1,9 +1,10 @@
 # 有间隙卡片缩放/无缝CollectionViewBanner无限轮播图
 
 
+[博客传送门](https://www.geekblog.top/undefined/uncategorized/2018-06-28-无限轮播.html)
 
 ***
-> ###为什么重复造轮子?
+> 为什么重复造轮子?
 > 因为大多数banner都是无缝滚动,有卡片缩放效果的又没有
 > PageControl,且PageControl样式不支持自定义,所以根据自己项目
 > 需求和UI需求,造了一个轮子,希望分享出来能对大家有帮助,好用的话
@@ -15,7 +16,7 @@
 
 ***
 
-> ###使用姿势
+> 使用姿势
  
  
 ```
@@ -28,7 +29,7 @@ pod 'CollectionViewBanner', '~> 1.0'
 end
 ```
 
-> ###urls图片轮播
+> urls图片轮播
 
 ```
 	/*带间隙banner
@@ -48,7 +49,7 @@ end
 ```
 
 
-> ###本地图片轮播
+> 本地图片轮播
 
 ```
     CollecBannerView *bannerView1 = [[CollecBannerView alloc] initWithFrame:CGRectMake(0, 300, [UIScreen mainScreen].bounds.size.width, 200) cellMidSize:CGSizeMake(kScreenWidth, 200)];
@@ -60,7 +61,7 @@ end
     [self.view addSubview:bannerView1];
 ```
 
-> #####其他属性详细说明
+> 其他属性详细说明
 
 * @property (strong, nonatomic) UIPageControl *customPageControl;
 
@@ -81,4 +82,3 @@ bannerView.pageControlFrame = CGRectMake(0, 200-15, kScreenWidth, 15);
  
  * 有用的话,希望大家点个星再走;
  * 有bug或者其他问题,也希望能issues或者发邮箱
- * 详细原理有时间再补博客
