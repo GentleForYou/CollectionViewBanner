@@ -44,6 +44,8 @@
 @property (nonatomic, strong) UIColor *normalPageColor;
 //设置pageControl的frame
 @property (nonatomic, assign) CGRect pageControlFrame;
+//是否隐藏pageControl 默认为NO
+@property (nonatomic, assign) BOOL hidePageControl;
 
 //自定义pageControl, pageControl的frame需要自己设置
 @property (strong, nonatomic) UIPageControl *customPageControl;

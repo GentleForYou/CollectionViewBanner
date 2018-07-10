@@ -205,6 +205,11 @@
     _pageControlFrame = pageControlFrame;
     _pageControl.frame = pageControlFrame;
 }
+- (void)setHidePageControl:(BOOL)hidePageControl
+{
+    _hidePageControl = hidePageControl;
+    _pageControl.hidden = hidePageControl;
+}
 - (void)setCellCornerRadius:(CGFloat)cellCornerRadius
 {
     _cellCornerRadius = cellCornerRadius;
