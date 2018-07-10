@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CollectionViewBanner"
-  s.version      = "1.0.5"
+  s.version      = "1.0.6"
   s.summary      = "有间隙卡片放大效果/无间隙无限制轮播Banner"
 
   # This description is used to generate tags and improve search results.
