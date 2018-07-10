@@ -29,7 +29,7 @@ pod 'CollectionViewBanner', '~> 1.0'
 end
 ```
 
-> urls图片轮播
+> urls图片轮播(中间放大效果＋间隙)
 
 ```
 	/*带间隙banner
@@ -49,7 +49,7 @@ end
 ```
 
 
-> 本地图片轮播
+> 无缝banner轮播(普通轮播)
 
 ```
     CollecBannerView *bannerView1 = [[CollecBannerView alloc] initWithFrame:CGRectMake(0, 300, [UIScreen mainScreen].bounds.size.width, 200) cellMidSize:CGSizeMake(kScreenWidth, 200)];
