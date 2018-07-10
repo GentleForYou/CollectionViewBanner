@@ -120,7 +120,7 @@
 {
     if (urlImgs.count > 0) {
         NSMutableArray *arr = [urlImgs mutableCopy];
-        if (_urlImgs.count == 1) {
+        if (urlImgs.count == 1) {
             [arr addObject:urlImgs[0]];
             [arr addObject:urlImgs[0]];
             [arr insertObject:urlImgs[urlImgs.count-1] atIndex:0];
