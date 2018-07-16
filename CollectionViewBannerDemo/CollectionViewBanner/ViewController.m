@@ -28,7 +28,6 @@
     [bannerView setClickBlock:^(NSInteger currentIndex) {
         NSLog(@"网络第%ld张图", currentIndex);
     }];
-    bannerView.hidePageControl = YES;
     [self.view addSubview:bannerView];
     
     //本地图片轮播

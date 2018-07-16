@@ -22,6 +22,7 @@
 @property (strong, nonatomic) UIPageControl *pageControl;
 
 @property (nonatomic, assign) NSInteger selectedIndex;//当前index
+@property (nonatomic, assign) BOOL isOne;//是否是单张图片
 
 @property (nonatomic,weak) NSTimer *timer;
 @property (nonatomic, copy) NSArray *dataImgs;
@@ -40,6 +41,8 @@
     if (self = [super initWithFrame:frame]) {
         self.hidesForSinglePage = YES;
         self.autoScroll = YES;
+        self.scrollEnabledForSinglePage = YES;
+        self.isOne = NO;
         self.zoom = zoom;
         self.autoScrollTimeInterval = 2.0f;
         self.line = line;
@@ -121,11 +124,13 @@
     if (urlImgs.count > 0) {
         NSMutableArray *arr = [urlImgs mutableCopy];
         if (urlImgs.count == 1) {
+            self.isOne = YES;
             [arr addObject:urlImgs[0]];
             [arr addObject:urlImgs[0]];
             [arr insertObject:urlImgs[urlImgs.count-1] atIndex:0];
             [arr insertObject:urlImgs[urlImgs.count-1] atIndex:0];
         } else {
+            self.isOne = NO;
             [arr addObject:urlImgs[0]];
             [arr addObject:urlImgs[1]];
             [arr insertObject:urlImgs[urlImgs.count-1] atIndex:0];
@@ -138,22 +143,28 @@
         _selectedIndex = 0;
         _pageControl.numberOfPages = urlImgs.count;
         _pageControl.currentPage = _selectedIndex;
-        if (urlImgs.count == 1 && _hidesForSinglePage) {
-            _pageControl.hidden = YES;
+        if (urlImgs.count == 1) {//单张默认隐藏pageControl
+            if (_hidesForSinglePage) {
+                _pageControl.hidden = YES;
+            }
+            if (_scrollEnabledForSinglePage && _line == 0) {//单张默认无缝轮播图不滚动
+                _collectionView.scrollEnabled = NO;
+            }
         }
     }
 }
 - (void)setLocalImgs:(NSArray *)localImgs
 {
     if (localImgs.count > 0) {
-        
          NSMutableArray *arr = [localImgs mutableCopy];
         if (localImgs.count == 1) {
+            self.isOne = YES;
             [arr addObject:localImgs[0]];
             [arr addObject:localImgs[0]];
             [arr insertObject:localImgs[localImgs.count-1] atIndex:0];
             [arr insertObject:localImgs[localImgs.count-1] atIndex:0];
         } else {
+            self.isOne = NO;
             [arr addObject:localImgs[0]];
             [arr addObject:localImgs[1]];
             [arr insertObject:localImgs[localImgs.count-1] atIndex:0];
@@ -168,8 +179,13 @@
         _selectedIndex = 0;
         _pageControl.numberOfPages = localImgs.count;
         _pageControl.currentPage = _selectedIndex;
-        if (localImgs.count == 1 && _hidesForSinglePage) {
-            _pageControl.hidden = YES;
+        if (localImgs.count == 1) {
+            if (_hidesForSinglePage) {//单张默认隐藏pageControl
+                _pageControl.hidden = YES;
+            }
+            if (_scrollEnabledForSinglePage && _line == 0) {//单张默认无缝轮播图不滚动
+                _collectionView.scrollEnabled = NO;
+            }
         }
     }
 }
@@ -188,6 +204,20 @@
 - (void)setHidesForSinglePage:(BOOL)hidesForSinglePage
 {
     _hidesForSinglePage = hidesForSinglePage;
+    if (_isOne && _hidesForSinglePage) {
+        _pageControl.hidden = YES;
+    } else {
+        _pageControl.hidden = NO;
+    }
+}
+- (void)setScrollEnabledForSinglePage:(BOOL)scrollEnabledForSinglePage
+{
+    _scrollEnabledForSinglePage = scrollEnabledForSinglePage;
+    if (_isOne && _scrollEnabledForSinglePage && _line == 0) {
+        _collectionView.scrollEnabled = NO;
+    } else {
+        _collectionView.scrollEnabled = YES;
+    }
 }
 - (void)setCustomPageControl:(UIPageControl *)customPageControl
 {
