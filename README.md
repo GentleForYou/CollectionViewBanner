@@ -24,7 +24,7 @@ platform :ios, "9.0"
 
 target '你的工程名' do
 
-pod 'CollectionViewBanner', '~> 1.0'
+pod 'CollectionViewBanner', '~> 1.1'
 
 end
 ```
