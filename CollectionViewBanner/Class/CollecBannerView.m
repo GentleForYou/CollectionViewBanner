@@ -66,7 +66,6 @@
         _selectedIndex = 0;
         BannerLayout *layout = [[BannerLayout alloc] initLine:_line itemSize:_cellMidSize zoom:self.zoom];
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, _collectionSize.width, _collectionSize.height) collectionViewLayout:layout];
-        _collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
@@ -105,7 +104,7 @@
             cell.imageView.image = [UIImage imageNamed:_dataImgs[indexPath.row]];
         } else if ([_dataImgs[indexPath.row] isKindOfClass:[UIImage class]]) {
             cell.imageView.image = _dataImgs[indexPath.row];
-        } 
+        }
     }
     cell.backgroundColor = [UIColor whiteColor];
     return cell;
@@ -156,7 +155,7 @@
 - (void)setLocalImgs:(NSArray *)localImgs
 {
     if (localImgs.count > 0) {
-         NSMutableArray *arr = [localImgs mutableCopy];
+        NSMutableArray *arr = [localImgs mutableCopy];
         if (localImgs.count == 1) {
             self.isOne = YES;
             [arr addObject:localImgs[0]];
@@ -271,7 +270,7 @@
 
 -(void)setAutoScroll:(BOOL)autoScroll{
     _autoScroll = autoScroll;
-
+    
     [self invalidateTimer];
     if (_autoScroll) {
         [self createTimer];
@@ -289,8 +288,9 @@
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if ([self scrollViewBorderJudge]) {
-        [self handCellSeleceLocation];
+    scrollView.scrollEnabled = YES;
+    if (self.autoScroll) {
+        [self createTimer];
     }
 }
 
@@ -300,17 +300,34 @@
         [self invalidateTimer];
     }
 }
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
-    if (!decelerate) {//不减速
-        if ([self scrollViewBorderJudge]) {
-            [self handCellSeleceLocation];
+    scrollView.scrollEnabled = NO;
+    CGFloat OffsetIndex = (scrollView.contentOffset.x+_line+_showLine)/BannerOffsetWidth;
+    NSInteger index = (NSInteger)((scrollView.contentOffset.x+_line+_showLine)/BannerOffsetWidth);
+    
+    CGPoint offset;
+    if (targetContentOffset->x > 0) {// <- 向左滚动
+        if ((NSInteger)(OffsetIndex*100)%100 > 50 || ABS(velocity.x) > 0.7) {
+            offset = CGPointMake(BannerOffsetWidth*(index+1)-BannerOffsetleft, 0.0);
+            _selectedIndex = index-1;
+        } else {
+            offset = CGPointMake(BannerOffsetWidth*index-BannerOffsetleft, 0.0);
+            _selectedIndex = index-2;
+        }
+    } else {// -> 向右滚动
+        if ((NSInteger)(OffsetIndex*100)%100 < 50 || ABS(velocity.x) > 0.7) {
+            offset = CGPointMake(BannerOffsetWidth*index-BannerOffsetleft, 0.0);
+            _selectedIndex = index-2;
+        } else {
+            offset = CGPointMake(BannerOffsetWidth*(index+1)-BannerOffsetleft, 0.0);
+            _selectedIndex = index-1;
         }
     }
-    if (self.autoScroll) {
-        [self createTimer];
-    }
+    _pageControl.currentPage = _selectedIndex;
+    *targetContentOffset = offset;
 }
+
 #pragma mark 边界以及cell位置处理
 //处理边界条件 返回YES代表未触发边界条件,且满足_dataImgs.count > 0
 - (BOOL)scrollViewBorderJudge
@@ -331,28 +348,5 @@
     }
     return NO;
 }
-//滚动停止确保cell在中间
-- (void)handCellSeleceLocation
-{
-    
-    CGFloat OffsetIndex = (_collectionView.contentOffset.x+_line+_showLine)/BannerOffsetWidth;
-    NSInteger index = (NSInteger)((_collectionView.contentOffset.x+_line+_showLine)/BannerOffsetWidth);
-    if ((NSInteger)(OffsetIndex*100)%100 <= 50) {
-           [_collectionView setContentOffset:CGPointMake(BannerOffsetWidth*index-BannerOffsetleft, 0.0) animated:YES];
-           _selectedIndex = index-2;
-    } else {
-        [_collectionView setContentOffset:CGPointMake(BannerOffsetWidth*(index+1)-BannerOffsetleft, 0.0) animated:YES];
-        _selectedIndex = index-1;
-    }
-    _pageControl.currentPage = _selectedIndex;
-}
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end
